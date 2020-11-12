@@ -38,8 +38,7 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDto getCustomerById(int id) {
         Optional<Customer> customerOptional = customerRepository.findById(id);
 
-        if (customerOptional.isEmpty())         return null;
-        return CustomerDto.getCustomerDto(customerOptional.get());
+        return customerOptional.map(CustomerDto::getCustomerDto).orElse(null);
     }
 
     @Override

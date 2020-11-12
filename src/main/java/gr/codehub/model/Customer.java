@@ -2,11 +2,9 @@ package gr.codehub.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Data
@@ -18,8 +16,14 @@ public class Customer {
     private int id;
 
     private String name;
+    @Column(unique = true)
     private String address;
     private int age;
     private LocalDateTime registrationDate;
 
+    @OneToMany(mappedBy = "customer")
+    private List<Basket> baskets;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Contract> contracts;
 }
