@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Upload File Request Page</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+	<form method="POST" action="uploadFile" enctype="multipart/form-data">
+		File to upload: <input type="file" name="file" id="file"><br />
+		Name: <input type="text" name="name" id="name"><br /> <br />
+		<input type="submit" value="Upload"> Press here to upload the file!
+		<br/>
+		<input type="button" value="Upload using ajax" onclick="addCustomer()"> Press here to upload the file!
+	</form>
+
+
+<script>
+
+	function addCustomer() {
+
+    var actionUrl = "/uploadFile";
+    var input = document.getElementById('file');
+    var files = input.files;
+    var formData = new FormData();
+
+    for (var i = 0; i != files.length; i++) {
+        formData.append("file", files[i]);
+    }
+
+    formData.append("name", $('#name').val());
+
+
+    $.ajax(
+        {
+            url: actionUrl,
+            data: formData,
+            processData: false,
+            contentType: false,
+            type: "POST",
+            success: function (data) {
+                alert(data)
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error from server: " + errorThrown);
+            }
+        }
+    );
+}
+
+
+
+</script>
+
+
+
+</body>
+</html>
