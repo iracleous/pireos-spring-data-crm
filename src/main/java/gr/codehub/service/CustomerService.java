@@ -1,8 +1,6 @@
 package gr.codehub.service;
 
 import gr.codehub.dto.CustomerDto;
-import gr.codehub.model.Customer;
-
 import java.util.List;
 
 public interface CustomerService {
